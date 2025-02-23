@@ -2,17 +2,6 @@ import torch
 from torch import nn
 from mha import MultiHeadAttention
 
-
-GPT_CONFIG_124M = {
-    "vocab_size": 50257,    # Vocabulary size
-    "context_length": 1024, # Context length
-    "emb_dim": 768,         # Embedding dimension
-    "n_heads": 12,          # Number of attention heads
-    "n_layers": 12,         # Number of layers
-    "drop_rate": 0.1,       # Dropout rate
-    "qkv_bias": False       # Query-Key-Value bias
-}
-
 class LayerNorm(nn.Module):
     def __init__(self, emb_dim):
         super().__init__()
@@ -122,20 +111,20 @@ def print_gradients(model, x):
 def generate_text_simple(model, idx, max_new_tokens, context_size):
     for _ in range(max_new_tokens):
         tokens = idx[:, -context_size:]
-        print(f"token: {tokens.shape}")
-        print(tokens)
+        # print(f"token: {tokens.shape}")
+        # print(tokens)
 
         with torch.no_grad():
             logits = model(tokens)
-        print(f"logits: {logits.shape}")
+        # print(f"logits: {logits.shape}")
 
         logits = logits[:, -1, :]
         probas = torch.softmax(logits, dim=-1)
-        print(f"probas: {probas.shape}")
+        # print(f"probas: {probas.shape}")
 
         next_token = torch.argmax(probas, dim=-1, keepdim=True)
-        print(f"next_token: {next_token.shape}")
-        print(next_token)
+        # print(f"next_token: {next_token.shape}")
+        # print(next_token)
 
         idx = torch.cat((idx, next_token), dim=1)
     
