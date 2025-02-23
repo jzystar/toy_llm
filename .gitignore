@@ -1,5 +1,6 @@
 *.pyc
 *.pth
-./model.pth
 gpt2/
+sms_spam_collection/
+*.zip
 __pycache__
