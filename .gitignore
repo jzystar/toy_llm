@@ -1,2 +1,5 @@
-.pyc
+*.pyc
+*.pth
+./model.pth
+gpt2/
 __pycache__
